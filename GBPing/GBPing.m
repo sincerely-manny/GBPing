@@ -385,7 +385,7 @@ static NSTimeInterval const kDefaultTimeout =           2.0;
         inet_ntop(sin->sin_family, &(sin->sin_addr), hoststr, INET6_ADDRSTRLEN);
         NSString *host = [[NSString alloc] initWithUTF8String:hoststr];
 
-        if([host isEqualToString:self.hostAddressString]) { // only make sense where received packet comes from expected source
+        if([host isEqualToString:self.hostAddressString] || [self.hostAddressString hasSuffix:@".255"]) { // only make sense where received packet comes from expected source (or broadcast address)
             NSDate *receiveDate = [NSDate date];
             NSMutableData *packet;
 
